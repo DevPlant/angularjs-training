@@ -1,0 +1,16 @@
+{
+  "name": "8-material-design",
+  "version": "1.0.0",
+  "description": "DevPlant AngularJS Traning - Material Design Introduction",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "pushstate-server": "^3.0.0"
+  },
+  "scripts": {
+    "modern": "node node_modules/.bin/pushstate-server ./app",
+    "vanilla": "node node_modules/.bin/pushstate-server ./app-vanilla"
+  },
+  "author": "Timo Bejan",
+  "license": "MIT"
+}

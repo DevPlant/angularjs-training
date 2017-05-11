@@ -1,0 +1,8 @@
+$default-viewport-width: 1200px;
+$default-view-port-margin: 0 auto;
+
+.default-viewport {
+  margin: $default-view-port-margin;
+  width: $default-viewport-width;
+}
+
