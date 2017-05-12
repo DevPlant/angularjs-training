@@ -7,12 +7,12 @@
 
         $routeProvider
             .when('/users', {
-                templateUrl: 'app/users/users.html',
+                templateUrl: 'app-vanilla/users/users.html',
                 controller: 'UserController',
                 controllerAs: 'vm'
             })
             .when('/users/:userId/posts', {
-                templateUrl: 'app/posts/posts.html',
+                templateUrl: 'app-vanilla/posts/posts.html',
                 controller: 'PostsController',
                 controllerAs: 'vm',
                 resolve: {
@@ -25,7 +25,7 @@
                 }
             })
             .when('/users/:userId/posts/:postId/comments', {
-                templateUrl: 'app/comments/comments.html',
+                templateUrl: 'app-vanilla/comments/comments.html',
                 controller: 'CommentsController',
                 controllerAs: 'vm',
                 resolve: {
