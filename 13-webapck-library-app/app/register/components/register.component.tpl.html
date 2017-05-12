@@ -1,0 +1,41 @@
+<md-card class="md-padding" flex="" style="width: 600px; margin: 50px auto 0;"><h3
+        class="panel-title">
+    <strong>Login</strong>
+</h3>
+    <h5>Register for the DevPlant Library</h5>
+    <div class="panel-body">
+        <form role="form" ng-submit="vm.register()">
+
+            <div layout="column">
+                <md-input-container class="md-block username-container" flex="">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="username" name="username" ng-model="vm.model.email" autofocus/>
+                </md-input-container>
+
+                <md-input-container class="md-block password-container" flex="">
+                    <label>Firstname</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname"
+                           autocomplete="new-password" ng-model="vm.model.firstName"/>
+                </md-input-container>
+
+                <md-input-container class="md-block password-container" flex="">
+                    <label>Lastname</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname"
+                           autocomplete="new-password" ng-model="vm.model.lastName"/>
+                </md-input-container>
+
+                <md-input-container class="md-block password-container" flex="">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           autocomplete="new-password" ng-model="vm.model.password"/>
+                </md-input-container>
+
+                <a class="md-accent" ng-if="vm.model.error">
+                    <strong>Registration Failed</strong></a>
+                <br/>
+
+                <md-button class="md-raised md-primary" type="submit">Register</md-button>
+            </div>
+        </form>
+    </div>
+</md-card>

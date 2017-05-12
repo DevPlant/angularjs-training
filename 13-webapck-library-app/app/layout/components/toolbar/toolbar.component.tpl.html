@@ -1,0 +1,16 @@
+<md-toolbar class="md-accent">
+    <div class="md-toolbar-tools">
+        <h2 flex md-truncate>DevPlant Library Application</h2>
+
+        <h3 ng-if="vm.principal">Logged in as: {{vm.principal.email}}</h3>
+        <md-button ng-href="login" ng-if="!vm.principal">
+            Login
+        </md-button>
+        <md-button ng-href="register" ng-if="!vm.principal">
+            Register
+        </md-button>
+        <md-button ng-click="vm.logout()" ng-if="vm.principal">
+            Logout
+        </md-button>
+    </div>
+</md-toolbar>

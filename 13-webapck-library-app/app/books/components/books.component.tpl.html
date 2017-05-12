@@ -1,0 +1,9 @@
+<md-content>
+    <h3>Our finest books</h3>
+    <md-card ng-repeat="book in vm.books.content" class="md-padding">
+        <h3>{{book.name}}</h3>
+        <h4>By: {{book.author.name}}</h4>
+        <p>{{book.synopsis}}</p>
+    </md-card>
+</md-content>
+

@@ -1,0 +1,28 @@
+<md-card class="md-padding" flex="" style="width: 600px; margin: 50px auto 0;"><h3
+        class="panel-title">
+    <strong>Login</strong>
+</h3>
+    <h5>Login</h5>
+    <div class="panel-body">
+        <form role="form" ng-submit="vm.login()">
+
+            <div layout="column">
+                <md-input-container class="md-block username-container" flex="">
+                    <label>Username</label>
+                    <input type="text" class="form-control" id="username" name="username" ng-model="vm.username" autofocus/>
+                </md-input-container>
+                <md-input-container class="md-block password-container" flex="">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           autocomplete="new-password" ng-model="vm.password"/>
+                </md-input-container>
+
+                <a class="md-warn" ng-if="vm.error">
+                    <strong>Login Failed</strong></a>
+                <br/>
+
+                <md-button class="md-raised md-primary" type="submit">Login</md-button>
+            </div>
+        </form>
+    </div>
+</md-card>

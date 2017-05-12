@@ -7,6 +7,11 @@
 
         const vm = this;
 
+        vm.filter ={
+            name: "",
+            email: ""
+        };
+
         vm.users = [];
 
         onInit();
