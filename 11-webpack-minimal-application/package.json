@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "node node_modules/.bin/webpack-dev-server",
     "prod": "node node_modules/.bin/webpack-dev-server -p --compress",
-    "build-prod": "node node_modules/.bin/webpack -p"
+    "build-prod": "node node_modules/.bin/webpack -p",
+    "win-dev": "webpack-dev-server",
+    "win-prod": "webpack-dev-server -p --compress",
+    "win-build-prod": "webpack -p"
   },
   "author": "Timo Bejan - Devplant",
   "license": "MIT",
