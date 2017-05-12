@@ -10,7 +10,8 @@
     "pushstate-server": "^3.0.0"
   },
   "scripts": {
-    "modern": "node node_modules/.bin/pushstate-server . 9200"
+    "modern": "node node_modules/.bin/pushstate-server . 9200",
+    "win-modern": "pushstate-server . 9200"
   },
   "author": "Timo Bejan",
   "license": "MIT"
