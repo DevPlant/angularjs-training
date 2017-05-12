@@ -1,6 +1,8 @@
+import ToolbarTemplate from "./toolbar.component.tpl.html";
+
 export default  {
     $name: 'toolbar',
-    template: require('./toolbar.component.tpl.html'),
+    template: ToolbarTemplate,
     controllerAs: 'vm',
     controller: function () {
     }

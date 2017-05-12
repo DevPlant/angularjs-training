@@ -1,6 +1,8 @@
+import LayoutTemplate from "./layout.component.tpl.html";
+
 export default {
     $name: "layout",
-    template: require('./layout.component.tpl.html'),
+    template: LayoutTemplate,
     controllerAs: 'vm',
     controller: function () {
     }
