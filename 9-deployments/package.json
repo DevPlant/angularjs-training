@@ -17,7 +17,8 @@
     "docker-build": "docker build -t devplant/webpack-deployment-naive -f docker/Dockerfile .",
     "docker-stop": "docker rm $(docker stop $(docker ps -a -q --filter ancestor=devplant/webpack-deployment-naive))",
     "docker-run": "docker run -p 80:80 -t devplant/webpack-deployment-naive",
-    "docker-clean": "docker kill $(docker ps -q) && docker rm $(docker ps -q)"
+    "docker-clean": "docker kill $(docker ps -q) & docker rm $(docker ps -q)",
+    "docker-clean-win": "docker kill $(docker ps -q) ; docker rm $(docker ps -q)"
   },
   "author": "Timo Bejan",
   "license": "MIT"
