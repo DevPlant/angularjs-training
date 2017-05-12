@@ -5,6 +5,8 @@ This example illustrates how angular looks up properties, it'll go trough the sc
 
 ### Explanation
 
+We are using a hierarchical structure of HTML elements.
+
 ```
 <div>
     <h3>From Root Scope</h3>
@@ -20,8 +22,6 @@ This example illustrates how angular looks up properties, it'll go trough the sc
 </div>
 ```
 
-We are using a hierarchical structure of HTML elements.
-
 The top div has no controller, which means it'll look for the 2 properties "name" and "message"
 in the rootScope.
 
@@ -32,6 +32,8 @@ The third div has a controller called "ChildController" this means that it will 
 controller, if nothing is found it'll look in the scope of "MainController", if this fails it'll look for the property 
 on rootScope 
 
+If you'll look at index-vanilla.html you'll see that, the "vanilla" way of defining controllers is by using functions.
+this will work in any browser* 
 
 ``` 
     function ChildController($scope) {
@@ -44,11 +46,5 @@ on rootScope
         $scope.name = "I'm Main, but i'll inherit a message from root";
     }
 ```
-
-
-If you'll look at index-vanilla.html you'll see that, the "vanilla" way of defining controllers is by using functions.
-this will work in any browser* 
-
-
 
 _- browser*  - Internet Explorer is not a browser, its actually a tool used to download a browser._

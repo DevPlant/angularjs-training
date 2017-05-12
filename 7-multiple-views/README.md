@@ -1,17 +1,24 @@
 # 7-multiple-views
-
 Since we are now using multiple views - we'll need to use a server to serve our files
 So first you'll need to make sure you have node & npm installed.
+
 #### Download Link
 https://nodejs.org/en/download/
 
 After successful installation run
 
-`npm install`
+`npm update -g npm` - Wicked, NPM updates itself :)
+
+followed by `npm install` in this dir. 
+
+##### Windows users
+
+For windows you'll need to install pushstate-server globally using `npm install -g pushstate-server`
 
 After packages ( pushstate-server ) have been installed you can run your pushstate-server using following commands
 
-`npm run modern' - will run the modern ecma6 version on port 9200
+`npm run modern` - will run the modern ecma6 version on port 9200
+`npm run win-modern` - will work for windows
 
 Now visit: http://localhost:9200.
 
@@ -19,14 +26,14 @@ Now visit: http://localhost:9200.
 Its a javascript runtime - initially built for server-side JavaScript development 
 ( writing a server in Javascript... I know, right? ). 
 
-npm is a package manager for node, its somewhat similar to java's maven or gradle. Its a way to download an install libraries 
+**npm** is a package manager for **node**, its somewhat similar to java's maven or gradle. Its a way to download an install libraries 
 from the NPM repository. We'll be using this for future examples, because, obviously, you shouldn't reinvent the wheel.
 There are other package managers available, but we'll stick to node for now. Some examples for other package managers are
  **bower** and **yarn**. Bower will soon be deprecated and yarn is the new kid on the block. Its more efficient than node.
  
-# Lets have a look at package.json
+### Lets have a look at package.json
 
-Our current package.json file looks like this. To create a package.json file just run `npm ini` in an empty folder.
+Our current package.json file looks like this. To create a package.json file just run `npm init` in an empty folder.
  
 ```
 {
@@ -54,7 +61,7 @@ Our current package.json file looks like this. To create a package.json file jus
 So first, lets 
 
 This file basically contains some information about our project. 
-- A userdefined name,verison & description. Author and License information. These are all optional
+- A user-defined name, version & description. Author and License information. These are all optional
 - A list of dependencies, also optional, but hey, why else would we use it
 - A list of scripts, these can be anything, from bash to node, docker commands, etc.
 
@@ -83,13 +90,13 @@ Since we are talking about multiple views now, we are using an entry-point for o
 </section>
 ```
 
-The ng-view directive is used to tell angular where to put our views. Based on our URL it will know which view to insert.
+The `ng-view` directive is used to tell angular where to put our views. Based on our URL it will know which view to insert.
 We'll get to routing in a moment.
 
-# App structure
+### App structure
 We now structured the app in multiple files within the app folder. 
 
-## app.js
+#### app.js
 
 Lets first have a look at this syntax:
 
@@ -174,7 +181,7 @@ of the browser hash-syntax.
 
 #### Defining routes
 
-We are using the $routeProvider to define routs in our application. The first route defines the user-view we already know
+We are using the `$routeProvider` to define routs in our application. The first route defines the user-view we already know
 from previous examples. It simply states: 
 
 _"When the browser URL is equal to /users show the template 'users.html' using the Controller 'UserController' with the 
@@ -184,7 +191,7 @@ The next route is a bit more complicated. Remember the api we used so far: https
 
 Well it can also provide posts for a specific user. So we defined a path '/users/:userId/posts'
 
-- :userId is called a PathVariable. This means that its dynamic, its a placeholder.
+- `:userId` is called a PathVariable. This means that its dynamic, its a placeholder.
 
 The rest of the route reads the same:
 
@@ -194,7 +201,7 @@ alias 'vm "_
 The last entry is something called **resolve** - this is very important in angularJS applications. It's used for 
 pre-fetching data **before** we transition to a view. 
 
-So why is this useful? Well, the pathVariable :userId, could be a anything, so before we transition to a view showing 
+So why is this useful? Well, the pathVariable `:userId`, could be a anything, so before we transition to a view showing 
 user posts we'd first want to make sure that we have something to show.
 
 ```
@@ -208,8 +215,8 @@ user posts we'd first want to make sure that we have something to show.
     }
 
 ```
-The resolve property is an object which should contain 1..n functions returning a promise.
-In our case we user the routeParameter userId to fetch a user. If there is an error, we'll redirect to '/users' and
+The resolve property is an object which should contain 1..n functions returning a promise or an object.
+In our case we user the routeParameter `:userId` to fetch a user. If there is an error, we'll redirect to '/users' and
 reject the promise. By rejecting the promise, angular knows not to transition to this view.
 
 
@@ -238,7 +245,7 @@ Each Controller is now in his own file, for example, the user controller:
 
 ```
 
-They also use the IIFE syntax. The last line loads our module 'DevPlant' and adds the UserController to it.
+They also use the IIFE syntax. The last line loads our module 'DevPlantApp' and adds the UserController to it.
 
 - The syntax `angular.module('NAME')` is used to load an existing module, called "NAME"
 - The syntax `angular.module('NAME',[])` is used to declare a module called "NAME"

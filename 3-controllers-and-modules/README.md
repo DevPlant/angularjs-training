@@ -3,7 +3,7 @@ A primitive angularJS to illustrate $scope.
 We'll be using ECMA6 - unless you have an up-to-date browser like Chrome, this won't work
 index-old.html is a semi-fallback for not-so-modern browser, it still won't work in a lot of them
 
-So, why use features that won't work across the board ? we'll get there later within this training.
+So, why use features that won't work across the board ? We'll get there later within this training.
 
 ### Explanation
 
@@ -39,6 +39,7 @@ and its methods ( we'll get there ) used for manipulating the view
 
 **$scope passed to the constructor is angular's way of dependency injection. this is important!** 
 
+### Defining an Application and loading the Controller
 
 `angular.module('DevPlantApp', []).controller("MainController", MainController);`
 
@@ -49,17 +50,26 @@ A module is a collection of directives, services, controllers - we'll get there 
 Notice that when registering a controller we provide 2 arguments, first one is the name - this one is used in the 
 ng-controller directive, 2nd one is either a class or a function
 
+
+If you'll look at index-vanilla.html you'll see that, for compatibility sake we'll define the controller as a function.
+
 ``` 
- angular.module('DevPlantApp', []).controller("MainController", function ($scope) {
-         return new MainController($scope)
-     });
+    function MainController($scope) {
+
+        this.$scope = $scope;
+        this.$scope.participantName = '';
+
+        this.$scope.participants = [{name: 'Timo', age: 28},
+            {name: 'Anna', age: 32},
+            {name: 'Andrei', age: 25},
+            {name: 'Radu', age: 35},
+            {name: 'Razvan', age: 22}];
+
+    }
 ```
 
-
-If you'll look at index-vanilla.html you'll see that, for compatibility sake we'll first define a function which then 
-returns a new Object of type MainController.
-
-
-`orderBy:age `
+### Filter
 
 Also notice that, now, since participants are an array of objects, we can user "orderBy" on one of their properties
+
+`orderBy:age `

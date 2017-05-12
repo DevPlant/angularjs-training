@@ -49,7 +49,7 @@ We also change the <section> and <div> tags we used for structuring with angular
 ```
 
 the `md-content` directive is used to structure views, its a container for other elements.
-the 'md-toolbar' directive will provide a toolbar outside our `ng-view` - this will be shared across all views
+the `md-toolbar` directive will provide a toolbar outside our `ng-view` - this will be shared across all views
 
 ### The User, Posts and Comments views
 

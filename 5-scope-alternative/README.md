@@ -3,6 +3,9 @@ This is a better way of handling data, or the model of the application, so to sp
 
 ### Explanation
 
+The "Controller as" syntax helps us define which property we want, in case of nesting, we can always access both 
+parent and child properties, this is surprisingly useful. The interpolation {{ }} is done using the controllers alias.
+
 ```
 <div ng-controller="MainController as main">
     <h3>Main</h3>
@@ -15,9 +18,6 @@ This is a better way of handling data, or the model of the application, so to sp
     </div>
 </div>
 ```
-
-The "Controller as" syntax helps us define which property we want, in case of nesting, we can always access both 
-parent and child properties, this is surprisingly useful. The interpolation {{ }} is done using the controllers alias.
 
 The class syntax makes a lot of sense now! So, you'd ask, why would you alias "this" as "vm" in the vanilla sample, 
 that has something to do with how "this" behaves when adding "methods", See the next example.

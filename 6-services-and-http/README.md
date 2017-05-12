@@ -3,8 +3,8 @@ Lets have a look at services, and how to access data from an API
 
 ### Explanation
 
-
 Lets first have a look at the vanilla implementation
+
 ```
     angular.module('DevPlantApp', []).controller("SearchController", SearchController).factory("DataService", DataService);
 ```
@@ -37,10 +37,12 @@ lets have a look at the vanilla implementation
         return service;
     }
 ```
-We are injecting `$http, $log, $q` into the function, $http is a angular core service used for http requests.
-This is similar to jquery's `$.ajax`
+We are injecting `$http, $log, $q` into the function:
+- `$http` is a angular core service used for http requests. This is similar to jquery's `$.ajax`
+- `$log` is used for logging
+- `$q` is used to handle promises
 
-We are defining an API URL using const - this is just a public API that provides dummy data. 
+We are defining an API_URL using const - this is just a public API that provides dummy data. 
 
 Check it out at: https://jsonplaceholder.typicode.com
 
@@ -60,7 +62,6 @@ A promise can be:
 - rejected - The action relating to the promise failed
 - pending - Hasn't fulfilled or rejected yet
 - settled - Has fulfilled or rejected
-
 
 Back to our service. On the promise we are invoking "then" - this will execute when the promise is fulfilled, further we
 are invoking "catch" - this will execute in case the promise is "rejected", for example, the API is not available and the

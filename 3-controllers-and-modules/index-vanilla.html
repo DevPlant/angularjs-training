@@ -21,25 +21,21 @@
 
 <script type="text/javascript">
 
-    class MainController {
+    function MainController($scope) {
 
-        constructor($scope) {
-            this.$scope = $scope;
-            this.$scope.participantName = '';
+        this.$scope = $scope;
+        this.$scope.participantName = '';
 
-            this.$scope.participants = [{name: 'Timo', age: 28},
-                {name: 'Anna', age: 32},
-                {name: 'Andrei', age: 25},
-                {name: 'Radu', age: 35},
-                {name: 'Razvan', age: 22}];
-        }
+        this.$scope.participants = [{name: 'Timo', age: 28},
+            {name: 'Anna', age: 32},
+            {name: 'Andrei', age: 25},
+            {name: 'Radu', age: 35},
+            {name: 'Razvan', age: 22}];
 
     }
 
 
-    angular.module('DevPlantApp', []).controller("MainController", function ($scope) {
-        return new MainController($scope)
-    });
+    angular.module('DevPlantApp', []).controller("MainController", MainController);
 
 </script>
 
