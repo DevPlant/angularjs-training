@@ -13,9 +13,12 @@ For the spec defined by google, have a look at: https://material.io/guidelines/
 For Agnular, its a predefined set of Directives & Services as well as CSS which help us build quite pretty apps with little effort 
 and no previous design or UX experience.
 
+Angular Material is nice, because it provides a lot of well-documented samples and examples for everything you might need,
+check out their demo's!
+
 ##### Adding material design
 
-Material Design depeneds on some other angular core modules, aria, messages and animate. These together can be installed
+Material Design depends on some other angular core modules, aria, messages and animate. These together can be installed
 either using `npm install --save angular-animate angular-aria angular-messages angular-material`
 
 This project is already setup with these dependencies and the only thing that we had to change is the HTML. That's the beauty of it.
@@ -75,3 +78,14 @@ Finally we changed the anchor-tag to an `md-button`.
 
 The other HTML files are similar to this one, except for the fact that we display different data
 
+### app.js
+
+Since we want to customize the look a little, we'll use angular-material's built-in themeProvider, to change the theme
+
+```
+    $mdThemingProvider.theme('default')
+        .primaryPalette('deep-orange')
+        .accentPalette('light-green').warnPalette('red');
+```
+
+More about theming can be found here: https://material.angularjs.org/latest/Theming/01_introduction

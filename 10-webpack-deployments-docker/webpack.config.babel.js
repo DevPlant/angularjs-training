@@ -3,15 +3,11 @@ import path from "path";
 
 export default {
 
+    entry: './app/app.js',
+
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "bundle.js"
-    },
-
-    entry: {
-        app: [
-            './app/index.js'
-        ]
     },
 
     plugins: [new HtmlWebpackPlugin({template: './app/index.html'})],

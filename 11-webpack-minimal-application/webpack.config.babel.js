@@ -4,22 +4,18 @@ import path from "path";
 
 export default {
 
+    entry: './app/app.js',
+
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "bundle.js"
-    },
-
-    entry: {
-        app: [
-            './app/index.js'
-        ]
     },
 
     devServer: {
         historyApiFallback: true
     },
 
-    plugins:[new HtmlWebpackPlugin({template: './app/index.html'})],
+    plugins: [new HtmlWebpackPlugin({template: './app/index.html'})],
 
     module: {
         loaders: [
@@ -29,8 +25,7 @@ export default {
             }
             },
             {test: /\.html$/, loader: 'raw-loader', exclude: /node_modules/},
-            {test: /\.css$/, loader: 'style-loader!css-loader'},
-            {test: /\.scss/, loader: 'style-loader!css-loader!sass-loader'},
+            {test: /\.css$/, loader: 'style-loader!css-loader'}
         ]
     }
 };

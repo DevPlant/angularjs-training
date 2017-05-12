@@ -33,76 +33,50 @@ You'll need docker for this step: https://www.docker.com/get-docker
 
 Depending on your OS this might be somewhat different.
 
+After docker is installed, you can run:
+
+- `npm run docker-build` - to build the image
+- `npm run docker-stop` - to stop the current running instance
+- `npm run docker-run` - to run the image, after build
+- `npm run docker-clean` - to remove all docker containers
+- `npm run docker-clean-win` - to remove all docker containers on windows
 
 
+### Looking at the setup
 
-Material Design is a UI/UX paradigm developed by google. It basically tells you how web & mobile apps should look and feel.
-AngularJS adopted this design philosophy withing the Angular Material Design Library: https://material.angularjs.org/latest/
+We have a new folder called docker, this contains a Dockerfile and an nginx.conf file.
+- The Docker file is used to describe how an image should be assembled
+- The nginx.conf is a configuration file for nginx 
 
-For the spec defined by google, have a look at: https://material.io/guidelines/
 
-For Agnular, its a predefined set of Directives & Services as well as CSS which help us build quite pretty apps with little effort 
-and no previous design or UX experience.
+#### A look at the Docker file
 
-##### Adding material design
-
-Material Design depeneds on some other angular core modules, aria, messages and animate. These together can be installed
-either using `npm install --save angular-animate angular-aria angular-messages angular-material`
-
-This project is already setup with these dependencies and the only thing that we had to change is the HTML. That's the beauty of it.
-
-Our index file changed a little to accommodate the new dependencies
-
-```
-<script src="node_modules/angular/angular.min.js"></script>
-<script src="node_modules/angular-route/angular-route.min.js"></script>
-<script src="node_modules/angular-animate/angular-animate.min.js"></script>
-<script src="node_modules/angular-aria/angular-aria.min.js"></script>
-<script src="node_modules/angular-messages/angular-messages.min.js"></script>
-<script src="node_modules/angular-material/angular-material.min.js"></script>
+- The Dockerfile basically states the following, start from an `nginx` image
+- Copy our nginx.conf into the image to __/etc/nginx/conf.d/default.conf__
+- Copy all our application code as well as the required libraries into the image
+- Our target path is `/usr/share/nginx/html` - this is where nginx looks by default when serving content
 
 ```
+FROM nginx
 
-We also change the <section> and <div> tags we used for structuring with angular-material directives
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 
-```
-<md-content>
-    <md-toolbar class="md-accent">
-        <div class="md-toolbar-tools">
-            <h2>Sample Data Application</h2>
-        </div>
-    </md-toolbar>
-    <md-content ng-view class="view-container"></md-content>
-</md-content>
-```
+COPY index.html /usr/share/nginx/html/
+COPY app/ /usr/share/nginx/html/app/
 
-the `md-content` directive is used to structure views, its a container for other elements.
-the 'md-toolbar' directive will provide a toolbar outside our `ng-view` - this will be shared across all views
-
-### The User, Posts and Comments views
-
+COPY node_modules/angular/angular.min.js /usr/share/nginx/html/node_modules/angular/
+COPY node_modules/angular-route/angular-route.min.js /usr/share/nginx/html/node_modules/angular-route/
+COPY node_modules/angular-animate/angular-animate.min.js /usr/share/nginx/html/node_modules/angular-animate/
+COPY node_modules/angular-aria/angular-aria.min.js /usr/share/nginx/html/node_modules/angular-aria/
+COPY node_modules/angular-messages/angular-messages.min.js /usr/share/nginx/html/node_modules/angular-messages/
+COPY node_modules/angular-material/angular-material.min.js /usr/share/nginx/html/node_modules/angular-material/
+COPY node_modules/angular-material/angular-material.min.css /usr/share/nginx/html/node_modules/angular-material/
 
 ```
-<md-card class="md-padding">
-    <md-list>
-        <md-subheader>All Users</md-subheader>
-        <md-list-item class="md-3-line" ng-repeat="user in vm.users">
-            <div class="md-list-item-text" layout="column">
-                <h3>{{user.name}}</h3>
-                <h4>{{user.email}}</h4>
-                <p>{{user.address.street}}, {{user.address.suite}}, {{user.address.city}}, {{user.address.zipcode}}</p>
-            </div>
-            <md-button ng-href="/users/{{user.id}}/posts">Posts</md-button>
-        </md-list-item>
-    </md-list>
-</md-card>
-```
 
-We're using a card (https://material.io/guidelines/components/cards.html) to structure our content.
-Inside we use an md-list to show one user at a time with the same `ng-repeat` we had before.
-`layout=column` tells angular-material to show the nested elements one beneath the other, try to change it to "row"
+#### What is nginx
+Its an high-performance HTTP Server, its the most commonly used server for web applications that are built with just
+javascript, html, and css
 
-Finally we changed the anchor-tag to an `md-button`.
-
-The other HTML files are similar to this one, except for the fact that we display different data
-
+The nginx.conf file is used to overwrite some default behaviour, it basically allows us to run HTML5 mode in our angular
+application.
