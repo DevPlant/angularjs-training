@@ -7,36 +7,38 @@
 
         $routeProvider
             .when('/users', {
-                templateUrl: 'users/users.html',
+                templateUrl: 'app/users/users.html',
                 controller: 'UserController',
                 controllerAs: 'vm'
             })
             .when('/users/:userId/posts', {
-                templateUrl: 'posts/posts.html',
+                templateUrl: 'app/posts/posts.html',
                 controller: 'PostsController',
                 controllerAs: 'vm',
                 resolve: {
-                    user: function (DataService, $route, $location) {
+                    user: function (DataService, $route, $location, $q) {
                         return DataService.getUser($route.current.params.userId).catch(function () {
-                            console.log('failed to resolve');
                             $location.url('/users');
+                            return $q.reject('Post not available');
                         });
                     }
                 }
             })
             .when('/users/:userId/posts/:postId/comments', {
-                templateUrl: 'comments/comments.html',
+                templateUrl: 'app/comments/comments.html',
                 controller: 'CommentsController',
                 controllerAs: 'vm',
                 resolve: {
-                    user: function (DataService, $route, $location) {
+                    user: function (DataService, $route, $location, $q) {
                         return DataService.getUser($route.current.params.userId).catch(function () {
                             $location.url('/users');
+                            return $q.reject('Post not available');
                         });
                     },
-                    post: function (DataService, $route, $location) {
+                    post: function (DataService, $route, $location, $q) {
                         return DataService.getPost($route.current.params.postId).catch(function () {
                             $location.url('/users');
+                            return $q.reject('Post not available');
                         });
                     }
                 }

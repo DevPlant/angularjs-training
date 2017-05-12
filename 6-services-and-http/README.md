@@ -42,6 +42,8 @@ This is similar to jquery's `$.ajax`
 
 We are defining an API URL using const - this is just a public API that provides dummy data. 
 
+Check it out at: https://jsonplaceholder.typicode.com
+
 Next we are defining our service, this is an Object that will be returned by this function. Its members are usually
 functions, these functions perform data processing and fetching, so you separate business logic from controllers.
 Services can the be injected into the controller just as `$scope`
