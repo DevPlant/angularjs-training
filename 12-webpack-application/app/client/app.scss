@@ -3,6 +3,6 @@ $default-view-port-margin: 0 auto;
 
 .default-viewport {
   margin: $default-view-port-margin;
-  width: $default-viewport-width;
+  max-width: $default-viewport-width;
 }
 
