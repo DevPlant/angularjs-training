@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "node node_modules/.bin/webpack-dev-server",
     "prod": "node node_modules/.bin/webpack-dev-server -p --compress",
-    "build-prod": "node node_modules/.bin/webpack -p"
+    "build-prod": "node node_modules/.bin/webpack -p",
+    "docker-build": "node node_modules/.bin/webpack -p && docker build -t devplant/webpack-demo-app -f docker/Dockerfile .",
+    "docker-run": "docker rm $(docker stop $(docker ps -a -q --filter ancestor=devplant/webpack-demo-app)) || sleep 2 && docker run -p 80:80 -t devplant/webpack-demo-app",
+    "docker-clean": "sleep 1 || docker kill $(docker ps -q) || docker rm $(docker ps -q)"
   },
   "author": "Timo Bejan - Devplant",
   "license": "MIT",

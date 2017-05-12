@@ -18,9 +18,9 @@ ng-model directive binds a property called participantName to the current scope 
 
 `<li ng-repeat="participant in participants | filter:participantName | orderBy:'-toString()' ">`
 
-ng-repeat directive will loop trough the participants defined, filtering using participantName model, 
-sorting descending ( because we used minus ) - toString is called since we need a property of the object "participant"
-so toString() invoked on a string returns that string - you'll see in further examples we'll use properties of a given object
+ng-repeat directive will loop trough the participants defined, filtering using the participantName model we defined above, 
+sorting descending ( because we used minus ) - toString is called since we need a property of the object "participant".
+toString() invoked on a string returns that string - you'll see in further examples we'll use properties of a given object
 for example "age"
 
 `Hello: {{name}}`
