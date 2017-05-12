@@ -1,4 +1,4 @@
-# Running this example
+# 7-multiple-views
 
 Since we are now using multiple views - we'll need to use a server to serve our files
 So first you'll need to make sure you have node & npm installed.
@@ -13,8 +13,7 @@ After packages ( pushstate-server ) have been installed you can run your pushsta
 
 `npm run modern' - will run the modern ecma6 version on port 9200
 
-Now visit: http://localhost:9200 or http://localhost:9201 depending on which you ran.
-You can obviously run both at the same time.
+Now visit: http://localhost:9200.
 
 ### So what is this node thing ...
 Its a javascript runtime - initially built for server-side JavaScript development 
@@ -91,6 +90,25 @@ We'll get to routing in a moment.
 We now structured the app in multiple files within the app folder. 
 
 ## app.js
+
+Lets first have a look at this syntax:
+
+```
+(function () {
+    'use strict';
+
+    // your code here
+    
+})();
+
+```
+This notation is called **immediately invoked function expression**  or IIFE. It prevents polluting the Global JavaScript
+scope and allows encapsulation. Variables declared inside are private to this function.
+
+User Strict tells JavaScript to use strict mode, that way things like
+`x = 3;` will throw an error. Correct would be `const x = 3;` or `let x= 3;`
+
+#### Application entry point
 
 ```
 (function () {
@@ -193,3 +211,90 @@ user posts we'd first want to make sure that we have something to show.
 The resolve property is an object which should contain 1..n functions returning a promise.
 In our case we user the routeParameter userId to fetch a user. If there is an error, we'll redirect to '/users' and
 reject the promise. By rejecting the promise, angular knows not to transition to this view.
+
+
+### A look at Controllers
+
+Each Controller is now in his own file, for example, the user controller:
+
+```
+(function () {
+    'use strict';
+
+    class UserController {
+
+        constructor(DataService) {
+            this.DataService = DataService;
+            this.DataService.getUsers().then((users) => {
+                this.users = users;
+            });
+        }
+
+    }
+
+    angular.module('DevPlantApp').controller("UserController", UserController);
+
+})();
+
+```
+
+They also use the IIFE syntax. The last line loads our module 'DevPlant' and adds the UserController to it.
+
+- The syntax `angular.module('NAME')` is used to load an existing module, called "NAME"
+- The syntax `angular.module('NAME',[])` is used to declare a module called "NAME"
+- The syntax `angular.module('NAME',['Dependency'])` is used to declare a module called "NAME" with a dependency on a module called "Dependency" 
+
+
+##### Posts Controller
+
+The posts Controller is similar to the UserController, except it also gets injected the "user" object we **resolved** in the routeConfiguration
+
+```
+(function () {
+    'use strict';
+
+    class PostsController {
+
+        constructor(DataService, user) {
+            this.DataService = DataService;
+            this.user = user;
+            this.DataService.getUserPosts(this.user.id).then((posts) => {
+                this.posts = posts;
+            });
+        }
+
+    }
+
+    angular.module('DevPlantApp').controller("PostsController", PostsController);
+
+})();
+
+```
+
+It then proceeds to use the DataService to get posts for a specific user.
+
+
+##### posts.html
+
+The posts.html template is similar to our user.html file, we display the user for which the posts haven been loaded
+and then proceed to iterate over the posts, displaying them one at a time.
+
+```
+<div>
+    <h3>Posts for User {{vm.user.name}}</h3>
+    <p ng-repeat="post in vm.posts">
+        <strong>Title: </strong>{{post.title}}
+        <br>
+        <strong>Body: </strong>{{post.body}}
+        <br>
+        <a ng-href="/users/{{vm.user.id}}/posts/{{post.id}}/comments">Show Comments</a>
+    <hr>
+    </p>
+    <a ng-href="/users">Back to Users</a>
+</div>
+```
+
+The `ng-href` directive is used to navigate to the user view as well as to the comments view.
+
+`ng-href="/users/{{vm.user.id}}/posts/{{post.id}}/comments"` - Uses data interpolation to build a dynamic URL for each post.
+Given vm.user.id == 3 and post.id == 13, a resulting link would look like this: "/users/3/posts/13/comments".  

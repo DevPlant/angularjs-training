@@ -1,5 +1,5 @@
 {
-  "name": "8-material-design",
+  "name": "8-deployments",
   "version": "1.0.0",
   "description": "DevPlant AngularJS Traning - Deployments",
   "dependencies": {
@@ -14,7 +14,10 @@
     "pushstate-server": "^3.0.0"
   },
   "scripts": {
-    "modern": "node node_modules/.bin/pushstate-server . 9203"
+    "docker-build": "docker build -t devplant/webpack-deployment-naive -f docker/Dockerfile .",
+    "docker-stop": "docker rm $(docker stop $(docker ps -a -q --filter ancestor=devplant/webpack-deployment-naive))",
+    "docker-run": "docker run -p 80:80 -t devplant/webpack-deployment-naive",
+    "docker-clean": "docker kill $(docker ps -q) || docker rm $(docker ps -q)"
   },
   "author": "Timo Bejan",
   "license": "MIT"
