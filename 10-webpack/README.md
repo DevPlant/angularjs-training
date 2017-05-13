@@ -21,7 +21,7 @@ Webpack can do a lot of things, here are some if its main features, we'll use mo
 - Minify and uglify javascript
 - Allow us to use all the fancy es6 syntax ( this is actually babel, but webpack enables us to use it )
 - Bundling files allows us to split our code into small, concise fragments, each doing one very specific thing
- 
+
 #### Before we get into webpack, lets look at alternatives
 
 Here are some that where popular over the years
@@ -67,6 +67,10 @@ bundling for production. This is all there is to it, webpack does the rest
     "prod": "node node_modules/.bin/webpack-dev-server -p --compress",
     "build-prod": "node node_modules/.bin/webpack -p",
 ```
+
+#### Windows users need to install some packages globally
+
+`npm install -g webpack webpack-dev-server` - Since path resolves differently on Windows
 
 ### Webpack - configuration file
 
