@@ -1,4 +1,4 @@
-commonsConfiguration.$inject = ['StorageService'];
+authInterceptor.$inject = ['StorageService'];
 function authInterceptor(StorageService) {
     return {
         'request': function (config) {

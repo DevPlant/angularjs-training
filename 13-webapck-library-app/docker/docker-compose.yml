@@ -1,0 +1,8 @@
+version: '2'
+services:
+
+  webpack-lib-app:
+    image: devplant/webpack-lib-app
+    restart: always
+    ports:
+      - 9020:80
