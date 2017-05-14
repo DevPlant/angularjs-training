@@ -7,14 +7,16 @@ function configureState($stateProvider) {
         url: "/users/:userId/posts",
         component: posts.$name,
         resolve: {
-            user: resolveUser
+            user: ['DataService', '$stateParams',
+                function ($stateParams, DataService) {
+                console.log($stateParams);
+                console.log(DataService);
+                return $stateParams.getUserOrRedirect(DataService.userId);
+            }]
         }
     });
 
-    resolveUser.$inject = ['DataService','$stateParams'];
-    function resolveUser(DataService, $stateParams){
-        return DataService.getUserOrRedirect($stateParams.userId);
-    }
+
 }
 
 export default configureState;

@@ -1,0 +1,35 @@
+<md-content>
+    <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools">
+            <h2>DevPlant Library App</h2>
+        </div>
+    </md-toolbar>
+
+    <md-content class="hello-viewport" layout-align="center center">
+        <md-card class="md-padding">
+            <h3>Add a new Author</h3>
+            <md-input-container>
+                <label>Name</label>
+                <input ng-model="booksCtrl.newAuthor.name">
+            </md-input-container>
+
+            <md-button ng-click="booksCtrl.createAuthor()" class="md-raised md-accent">Create a new Author</md-button>
+
+        </md-card>
+
+        <h3>Authors</h3>
+        <md-card class="md-padding" ng-repeat="author in booksCtrl.authors">
+            <h3>{{author.name}}</h3>
+            <md-button ng-click="booksCtrl.deleteAuthor(author)" class="md-raised md-accent">Delete</md-button>
+        </md-card>
+
+        <h3>Books</h3>
+        <md-card class="md-padding" ng-repeat="book in booksCtrl.books">
+            <h3>{{book.name}} by {{book.author.name}} written in {{book.year}}</h3>
+            <p>{{book.synopsis}}</p>
+        </md-card>
+    </md-content>
+
+
+
+</md-content>

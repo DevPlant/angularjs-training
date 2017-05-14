@@ -10,9 +10,9 @@ import ngMaterial from "angular-material";
 //UI Router
 import uiRouter from "@uirouter/angularjs";
 //Our Components
-import HelloModule from "./modules/hello/hello.module";
+import BooksModule from "./modules/books/books.module";
 import DefaultRoutesConfiguration from "./app.routes";
 
-export default angular.module('DevPlantStarter', [ngMaterial, ngAnimate, ngAria, ngMessages, uiRouter,HelloModule])
+export default angular.module('DevPlantStarter', [ngMaterial, ngAnimate, ngAria, ngMessages, uiRouter, BooksModule])
     .config(DefaultRoutesConfiguration);
 

@@ -29,7 +29,7 @@ class TestController {
     customFail() {
         const failPromise = this.PromisesService.customFail();
         console.log('this will print before $3');
-        failPromise.catch((fail) => {
+        failPromise.then(()=>{console.log("will not happen");}).catch((fail) => {
             console.log("this will failed after 5 seconds", fail);
         });
         console.log('this will also print before $3');
@@ -43,7 +43,8 @@ class TestController {
                 console.log("neither will this, its not a promise, its a value");
             });
         } catch (exception) {
-            console.log("we will end up here, the .then will throw an exception, you can't invoke then on a strinc");
+            console.log("we will end up here, the .then will throw an exception, " +
+                "you can't invoke then on a string");
         }
     }
 
@@ -52,13 +53,14 @@ class TestController {
             console.log("Value turned to promise", promiseValue);
             return "test";
         }).then((data) => {
-            console.log('this will work, then returns are wrapped into promises, you can keep chaining it up', data);
+            console.log('this will work, then returns are wrapped into promises,' +
+                ' you can keep chaining it up. your input data is: ', data);
             return data + " 1 ";
         }).then((data) => {
             console.log('still going strong', data);
             return data + " 2 ";
         }).then((data) => {
-            console.log('then end', data);
+            console.log('then end, value is now: ', data);
         });
     }
 

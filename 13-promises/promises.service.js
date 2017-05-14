@@ -37,7 +37,7 @@ class PromisesService {
     }
 
     postAndUsersFailed() {
-        return this.$q.all([this.users(), this.posts(), this.invalid()]);
+        return this.$q.all([this.invalid(), this.users(), this.posts()]);
     }
 
     customOk() {
