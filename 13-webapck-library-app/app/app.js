@@ -11,7 +11,8 @@ import registerModule from "./register/register.module";
 import loginModule from "./login/login.module";
 import commonsModule from "./commons/commons.module";
 import booksModule from "./books/books.module";
+import adminModule from "./admin/admin.module";
 
 
-export default angular.module('devplant', [ngMaterial, uirouter, commonsModule, layoutModule, registerModule, loginModule, booksModule])
-    .config(config).config(routes).name;
+export default angular.module('devplant', [ngMaterial, uirouter, commonsModule, layoutModule, registerModule, loginModule, booksModule, adminModule])
+    .config(config).config(routes).constant('API_BASE_URL', 'http://localhost:9000');

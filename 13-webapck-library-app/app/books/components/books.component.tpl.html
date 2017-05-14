@@ -1,9 +1,31 @@
 <md-content>
     <h3>Our finest books</h3>
     <md-card ng-repeat="book in vm.books.content" class="md-padding">
-        <h3>{{book.name}}</h3>
-        <h4>By: {{book.author.name}}</h4>
-        <p>{{book.synopsis}}</p>
+
+        <md-card-content>
+            <h3>{{book.name}}</h3>
+            <h4>By: {{book.author.name}}</h4>
+            <p>{{book.synopsis}}</p>
+        </md-card-content>
+
+        <md-card-actions layout="row" layout-align="end center">
+            <a class="md-primary" ng-if="book.checked && !book.available">Book is not available!</a>
+            <md-button ng-if="vm.principal && !vm.haveReservation(book) && !book.checked"
+                       ng-click="vm.checkAvailability(book)">Check Availability
+            </md-button>
+            <md-button ng-if="vm.principal && vm.haveReservation(book)" ng-click="vm.cancelReservation(book)">Cancel
+                Reservation
+            </md-button>
+
+            <md-input-container ng-if="book.available && vm.principal && !vm.haveReservation(book)" style="margin-bottom: 0;">
+                <label>Pickup Date</label>
+                <md-datepicker ng-model="book.pickupDate" md-min-date="vm.now" ></md-datepicker>
+            </md-input-container>
+            <md-button ng-if="book.available && vm.principal && !vm.haveReservation(book)" ng-disabled="!book.pickupDate"
+                       ng-click="vm.makeReservation(book)">Make Reservation
+            </md-button>
+        </md-card-actions>
+
     </md-card>
 </md-content>
 

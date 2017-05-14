@@ -4,20 +4,17 @@ export default class AuthenticationService {
         return 'AuthenticationService';
     }
 
-    static get BASE_URL() {
-        return 'http://localhost:9000';
-    }
-
 
     static get $inject() {
-        return ['$http', '$log', '$q', '$state', 'StorageService'];
+        return ['$http', '$log', '$q', '$state', 'StorageService', 'API_BASE_URL'];
     }
 
-    constructor($http, $log, $q, $state, StorageService) {
+    constructor($http, $log, $q, $state, StorageService, API_BASE_URL) {
         this.$http = $http;
         this.$log = $log;
         this.$q = $q;
         this.$state = $state;
+        this.API_BASE_URL = API_BASE_URL;
         this.StorageService = StorageService;
         this.principal = this.getPrincipal();
     }
@@ -31,7 +28,7 @@ export default class AuthenticationService {
     getPrincipal() {
         if (!this.principal) {
             if (this.StorageService.getToken() != null) {
-                return this.$http.get(AuthenticationService.BASE_URL + "/api/user-management/self").then((response) => {
+                return this.$http.get(`${this.API_BASE_URL}/api/user-management/self`).then((response) => {
                     this.principal = response.data;
                     return this.principal
                 }).catch(() => {
@@ -45,8 +42,7 @@ export default class AuthenticationService {
     }
 
     register(registrationModel) {
-        return this.$http.post(AuthenticationService.BASE_URL + "/api/user-management/register", registrationModel).then((response) => {
-            console.log('registed', response);
+        return this.$http.post(`${this.API_BASE_URL}/api/user-management/register`, registrationModel).then((response) => {
             return true;
         }).catch(() => {
             return this.$q.reject('Registration failed!');
@@ -68,7 +64,7 @@ export default class AuthenticationService {
 
         const req = {
             method: 'POST',
-            url: AuthenticationService.BASE_URL + "/oauth/token",
+            url: `${this.API_BASE_URL}/oauth/token`,
             headers: headers,
             transformRequest: function (obj) {
                 const str = [];
@@ -82,7 +78,7 @@ export default class AuthenticationService {
 
         return this.$http(req).then((response) => {
             this.StorageService.setToken(response.data);
-            return this.$http.get(AuthenticationService.BASE_URL + "/api/user-management/self").then((response) => {
+            return this.$http.get(`${this.API_BASE_URL}/api/user-management/self`).then((response) => {
                 this.principal = response.data;
                 return this.principal
             }).catch(() => {

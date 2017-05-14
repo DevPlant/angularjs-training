@@ -1,0 +1,51 @@
+<md-dialog aria-label="Manage Book Stocks">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Manage Book Stocks {{vm.book.name}}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Pickups">
+                    <md-content class="md-padding">
+
+                        <md-list-item class="md-2-line" ng-repeat="stock in vm.stocks"
+                                      ng-if="stock.userId != null && stock.pickedUp == false">
+                            <div class="md-list-item-text" layout="column" ng-if="!author.editable">
+                                <h3>Pickup by: {{stock.requestFullName }}</h3>
+                                <p>Pickup date: {{stock.pickupTimestamp |date : 'dd.MM.yyyy'}}</p>
+                            </div>
+                            <md-checkbox class="md-secondary" ng-model="stock.pickedUp" ng-change="vm.stockPickedUp(stock)"></md-checkbox>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                        </md-list>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Returns">
+                    <md-content class="md-padding">
+
+                        <md-list-item class="md-3-line" ng-repeat="stock in vm.stocks"
+                                      ng-if="stock.userId != null && stock.pickedUp == true">
+                            <div class="md-list-item-text" layout="column" ng-if="!author.editable">
+                                <h3>Picked up by: {{stock.requestFullName }}</h3>
+                                <p>Pickup date: {{stock.pickupTimestamp |date : 'dd.MM.yyyy'}}</p>
+                                <p>Return date: {{stock.returnTimestamp |date : 'dd.MM.yyyy'}}</p>
+                            </div>
+                            <md-checkbox class="md-secondary" ng-model="stock.returned" ng-change="vm.stockReturned(stock)"></md-checkbox>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                        </md-list>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.close()" style="margin-right:20px;">
+                Close
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

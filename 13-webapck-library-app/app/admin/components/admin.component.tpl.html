@@ -1,0 +1,115 @@
+<md-content layout="column" class="app-view">
+
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Users" md-active="vm.$stateParams.activeTab == 'users'"  md-on-select="vm.changeTab('users')">
+            <md-content class="md-padding">
+                <md-card class="md-padding">
+                    <h3>User Listing</h3>
+                    </md-button>
+                    <md-list flex style="padding-top: 15px;">
+                        <md-list-item class="md-2-line" ng-repeat="user in vm.users">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>Email: {{ user.email }}</h3>
+                                <p>Full Name: {{user.fullName}}</p>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </md-card>
+            </md-content>
+        </md-tab>
+        <md-tab label="Authors" md-active="vm.$stateParams.activeTab == 'authors'" md-on-select="vm.$stateParams.activeTab = 'authors'">
+            <md-content class="md-padding">
+                <md-card class="md-padding">
+                    <h3>Author Management</h3>
+                    <md-button md-no-ink class="md-primary md-raised" ng-click="vm.addAuthor()">Add Author
+                    </md-button>
+                    <md-list flex style="padding-top: 15px;">
+                        <md-list-item class="md-2-line" ng-repeat="author in vm.authors">
+                            <div class="md-list-item-text" layout="column" ng-if="!author.editable">
+                                <h3>{{ author.name }}</h3>
+                            </div>
+                            <div class="md-list-item-text" layout="column" ng-if="author.editable">
+                                <md-input-container class="md-block" flex="">
+                                    <label>Author Name</label>
+                                    <input type="text" class="form-control" ng-model="author.name"/>
+                                </md-input-container>
+                            </div>
+
+                            <div layout="column">
+                                <md-button class="md-warn md-raised" ng-click="vm.saveOrEditAuthor(author)">
+                                    {{author.editable ? 'Save' : 'Edit'}}
+                                </md-button>
+                                <md-button class="md-warn md-raised" ng-click="vm.deleteAuthor(author)">
+                                    Delete
+                                </md-button>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </md-card>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="Books" md-active="vm.$stateParams.activeTab == 'books'" md-on-select="vm.changeTab('books')">
+            <md-content class="md-padding">
+                <md-card class="md-padding">
+                    <h3>Book Management</h3>
+                    <md-button md-no-ink class="md-primary md-raised" ng-click="vm.addBook()">Add Book
+                    </md-button>
+                    <md-list flex style="padding-top: 15px;">
+                        <md-list-item class="md-3-line" ng-repeat="book in vm.books">
+                            <div class="md-list-item-text" layout="column" ng-if="!book.editable">
+                                <h3>{{ book.name }} by: {{book.author.name}}, written in: {{book.year}}</h3>
+                                <h5>Number of copies: {{book.numberOfCopies}} - Number of rented copies:
+                                    {{book.numberOfRentedCopies}}</h5>
+                                <p>{{ book.synopsis }}</p>
+                            </div>
+                            <div class="md-list-item-text" layout="column" ng-if="book.editable">
+                                <md-input-container class="md-block" flex="">
+                                    <label>Book Name</label>
+                                    <input type="text" class="form-control" ng-model="book.name"/>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="">
+                                    <label>Book Synopsis</label>
+                                    <input type="text" class="form-control" ng-model="book.synopsis"/>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="">
+                                    <label>Publish Year</label>
+                                    <input type="number" class="form-control" ng-model="book.year"/>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="">
+                                    <label>Author</label>
+                                    <md-select ng-model="book.author.id" placeholder="Select a author">
+                                        <md-option ng-value="author.id" ng-repeat="author in vm.authors">{{ author.name }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+
+                            <div layout="column">
+                                <md-button class="md-warn md-raised" ng-click="vm.saveOrEditBook(book)">
+                                    {{book.editable ? 'Save' : 'Edit'}}
+                                </md-button>
+                                <md-button class="md-warn md-raised" ng-click="vm.deleteBook(book)">
+                                    Delete
+                                </md-button>
+                                <md-button class="md-warn md-raised" ng-click="vm.increaseStock(book)" ng-if="book.id">
+                                    Add Another Copy
+                                </md-button>
+                                <md-button class="md-warn md-raised" ng-click="vm.decreaseStock(book)" ng-if="book.id"
+                                           ng-disabled="book.numberOfCopies == book.numberOfRentedCopies">
+                                    Remove Copy
+                                </md-button>
+                                <md-button class="md-warn md-raised" ng-click="vm.manageBook(book)" ng-if="book.id">
+                                    Manage Reservations
+                                </md-button>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </md-card>
+            </md-content>
+        </md-tab>
+
+</md-content>

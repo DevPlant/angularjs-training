@@ -3,7 +3,7 @@ function themeConfiguration($mdThemingProvider) {
 
     $mdThemingProvider.theme('default')
         .primaryPalette('deep-orange')
-        .accentPalette('light-green').warnPalette('red');
+        .accentPalette('light-green').warnPalette('blue-grey');
 
 }
 
